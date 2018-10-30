@@ -1,3 +1,13 @@
+/*
+* Class: Coordinate
+*
+* Version: 1.0
+*
+* Date: 30.10.2018
+*
+* Copyright notice: AGPLv3
+*/
+
 package org.wahlzeit.model;
 
 public class Coordinate {
@@ -6,8 +16,9 @@ public class Coordinate {
 	 */
 	private double x, y, z;
 	
+	
 	/**
-	 *
+	 * @methodtype constructor
 	 */
 	public Coordinate(double x, double y, double z) {
 		this.x = x;
@@ -17,13 +28,19 @@ public class Coordinate {
 	
 	
 	/**
-	 *
+	 * computes the direct Cartesian distance
 	 */
-	// direct Cartesian distance
 	public double getDistance(Coordinate coordinate) {
-		return Math.sqrt(Math.pow(coordinate.x - x, 2) + Math.pow(coordinate.y - y, 2) + Math.pow(coordinate.z - z, 2));		
+		return Math.sqrt(
+				Math.pow(coordinate.x - x, 2) + 
+				Math.pow(coordinate.y - y, 2) + 
+				Math.pow(coordinate.z - z, 2)
+				);		
 	}
 
+	/**
+	 * checks if two coordinates are equal
+	 */
 	public boolean isEqual(Coordinate coordinate) {
 		final double THRESHOLD = 0.00001;
 
@@ -35,7 +52,9 @@ public class Coordinate {
 		return false;
 	}
 
-
+	/**
+	 * forward equals() to isEqual()
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -50,7 +69,7 @@ public class Coordinate {
 
 
 	/**
-	 *
+	 * getter and setter methods
 	 */
 	public double getX() {
 		return x;

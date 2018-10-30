@@ -1,3 +1,13 @@
+/*
+* Class: CoordinateTest
+*
+* Version: 1.0
+*
+* Date: 30.10.2018
+*
+* Copyright notice: AGPLv3
+*/
+
 package org.wahlzeit.model;
 
 import static junit.framework.TestCase.assertEquals;
@@ -8,6 +18,9 @@ import org.junit.Test;
 
 public class CoordinateTest {
 
+	/**
+	 * testing the constructor
+	 */
 	@Test
 	public void testCoordinate() {
 		Coordinate coordinate = new Coordinate(42.0, -1.0, 13.37);
@@ -17,6 +30,9 @@ public class CoordinateTest {
 		assertEquals(13.37, coordinate.getZ());
 	}
 
+	/**
+	 * a few tests for the method getDistance()
+	 */
 	@Test
 	public void testCoordinateGetDistance() {
 		final double THRESHOLD = 0.00001;
@@ -37,6 +53,9 @@ public class CoordinateTest {
 		assertEquals(coordinate5.getDistance(coordinate1), 39954501.676222, THRESHOLD);
 	}
 
+	/**
+	 * tests for equals() and isEqual()
+	 */
 	@Test
 	public void testCoordinateEqual() {
 		Coordinate coordinate1 = new Coordinate(42.0, -1.0, 13.37);
