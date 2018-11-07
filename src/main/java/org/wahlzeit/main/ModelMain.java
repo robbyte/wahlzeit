@@ -23,6 +23,8 @@ package org.wahlzeit.main;
 import com.google.appengine.api.images.Image;
 import com.google.appengine.api.images.ImagesServiceFactory;
 import org.wahlzeit.model.GlobalsManager;
+import org.wahlzeit.model.MountainPhotoFactory;
+import org.wahlzeit.model.MountainPhotoManager;
 import org.wahlzeit.model.Photo;
 import org.wahlzeit.model.PhotoCaseManager;
 import org.wahlzeit.model.PhotoFactory;
@@ -69,6 +71,13 @@ public abstract class ModelMain extends AbstractMain {
 
 		log.config(LogBuilder.createSystemMessage().addAction("load Photos").toString());
 		PhotoManager.getInstance().init();
+		
+		// instantiate the mountain photo classes
+		log.config(LogBuilder.createSystemMessage().addAction("init MountainPhotoFactory").toString());
+		MountainPhotoFactory.initialize();
+
+		log.config(LogBuilder.createSystemMessage().addAction("load MountainPhotos").toString());
+		MountainPhotoManager.getInstance().init();
 	}
 
 
