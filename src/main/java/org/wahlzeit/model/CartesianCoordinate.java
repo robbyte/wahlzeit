@@ -1,16 +1,16 @@
 /*
 * Class: CartesianCoordinate
 *
-* Version: 1.0
+* Version: 2.0
 *
-* Date: 16.11.2018
+* Date: 24.11.2018
 *
 * Copyright notice: AGPLv3
 */
 
 package org.wahlzeit.model;
 
-public class CartesianCoordinate implements Coordinate {
+public class CartesianCoordinate extends AbstractCoordinate {
 	/**
 	 *
 	 */
@@ -26,31 +26,6 @@ public class CartesianCoordinate implements Coordinate {
 		this.z = z;
 	}
 	
-	
-	/**
-	 * computes the direct Cartesian distance
-	 */
-	private double getDistance(CartesianCoordinate coordinate) {
-		return Math.sqrt(
-				Math.pow(coordinate.x - x, 2) + 
-				Math.pow(coordinate.y - y, 2) + 
-				Math.pow(coordinate.z - z, 2)
-				);		
-	}
-
-	/**
-	 * checks if two coordinates are equal
-	 */
-	private boolean isEqual(CartesianCoordinate coordinate) {
-		final double THRESHOLD = 0.00001;
-
-		if (Math.abs(x - coordinate.x) < THRESHOLD &&
-			Math.abs(y - coordinate.y) < THRESHOLD &&
-			Math.abs(z - coordinate.z) < THRESHOLD) {
-			return true;
-		}
-		return false;
-	}
 
 	/**
 	 * forward equals() to isEqual()
@@ -95,18 +70,13 @@ public class CartesianCoordinate implements Coordinate {
 		this.z = z;
 	}
 
-
+	/**
+	 * override abstract methods
+	 */
 	@Override
 	public CartesianCoordinate asCartesianCoordinate() {
 		return this;
 	}
-
-
-	@Override
-	public double getCartesianDistance(Coordinate coordinate) {
-		return getDistance(coordinate.asCartesianCoordinate());
-	}
-
 
 	@Override
 	public SphericCoordinate asSphericCoordinate() {
@@ -118,18 +88,6 @@ public class CartesianCoordinate implements Coordinate {
 		double theta = Math.toDegrees(t);
 		
 		return new SphericCoordinate(phi, theta, radius);
-	}
-
-
-	@Override
-	public double getCentralAngle(Coordinate coordinate) {
-		return this.asSphericCoordinate().getCentralAngle(coordinate.asSphericCoordinate());
-	}
-
-
-	@Override
-	public boolean isEqual(Coordinate coordinate) {
-		return isEqual(coordinate.asCartesianCoordinate());
 	}
 	
 }
