@@ -66,11 +66,11 @@ public abstract class ModelMain extends AbstractMain {
 		log.config(LogBuilder.createSystemMessage().addAction("load user").toString());
 		UserManager.getInstance().init();
 
-		log.config(LogBuilder.createSystemMessage().addAction("init PhotoFactory").toString());
-		PhotoFactory.initialize();
+		//log.config(LogBuilder.createSystemMessage().addAction("init PhotoFactory").toString());
+		//PhotoFactory.initialize();
 
-		log.config(LogBuilder.createSystemMessage().addAction("load Photos").toString());
-		PhotoManager.getInstance().init();
+		//log.config(LogBuilder.createSystemMessage().addAction("load Photos").toString());
+		//PhotoManager.getInstance().init();
 		
 		// instantiate the mountain photo classes
 		log.config(LogBuilder.createSystemMessage().addAction("init MountainPhotoFactory").toString());
@@ -107,7 +107,7 @@ public abstract class ModelMain extends AbstractMain {
 		UserManager userManager = UserManager.getInstance();
 		User user = new User(userId, nickName, emailAddress);
 
-		PhotoManager photoManager = PhotoManager.getInstance();
+		MountainPhotoManager photoManager = MountainPhotoManager.getInstance();
 		File photoDirFile = new File(photoDir);
 		FileFilter photoFileFilter = file -> file.getName().endsWith(".jpg");
 		File[] photoFiles = photoDirFile.listFiles(photoFileFilter);

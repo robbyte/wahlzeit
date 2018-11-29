@@ -17,7 +17,8 @@ public class Location {
 	private Coordinate coordinate;
 
 	/**
-	 *
+	 * @param coordinate
+	 * constructor
 	 */
 	public Location(Coordinate coordinate) {
 		this.coordinate = coordinate;
@@ -25,12 +26,15 @@ public class Location {
 	
 	
 	/**
-	 * getter and setter
+	 * @methodtype query
 	 */
 	public Coordinate getCoordinate() {
 		return coordinate;
 	}
 
+	/**
+	 * @methodtype mutation
+	 */
 	public void setCoordinate(Coordinate coordinate) {
 		this.coordinate = coordinate;
 	}

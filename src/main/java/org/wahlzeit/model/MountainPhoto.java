@@ -21,14 +21,15 @@ public class MountainPhoto extends Photo {
 	private Mountain mountain;
 
 	/**
-	 * @methodtype constructor
+	 * constructor
 	 */
 	public MountainPhoto() {
 		super();
 	}
 
 	/**
-	 * @methodtype constructor
+	 * @param myId
+	 * constructor
 	 */
 	public MountainPhoto(PhotoId myId) {
 		super(myId);
@@ -36,14 +37,14 @@ public class MountainPhoto extends Photo {
 	
 
 	/**
-	 * @methodtype get
+	 * @methodtype query
 	 */
 	public Mountain getMountain() {
 		return mountain;
 	}
 
 	/**
-	 * @methodtype set
+	 * @methodtype mutation
 	 */
 	public void setMountain(Mountain mountain) {
 		this.mountain = mountain;

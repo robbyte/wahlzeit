@@ -1,9 +1,9 @@
 /*
 * Class: AbstractCoordinate
 *
-* Version: 1.0
+* Version: 1.1
 *
-* Date: 24.11.2018
+* Date: 29.11.2018
 *
 * Copyright notice: AGPLv3
 */
@@ -12,14 +12,24 @@ package org.wahlzeit.model;
 
 public abstract class AbstractCoordinate implements Coordinate {
 
+	/**
+	 * @methodtype query
+	 */
 	@Override
 	public abstract CartesianCoordinate asCartesianCoordinate();
 	
+	
+	/**
+	 * @methodtype query
+	 */
 	@Override
 	public abstract SphericCoordinate asSphericCoordinate();
 	
 	
 	/**
+	 * @param c1
+	 * @param c2
+	 * @methodtype helper
 	 * computes the direct Cartesian distance
 	 */
 	private double getDistance(CartesianCoordinate c1, CartesianCoordinate c2) {
@@ -32,6 +42,10 @@ public abstract class AbstractCoordinate implements Coordinate {
 				);		
 	}
 	
+	/**
+	 * @param coordinate
+	 * @methodtype query
+	 */
 	@Override
 	public double getCartesianDistance(Coordinate coordinate) {
 		return getDistance(this.asCartesianCoordinate(), coordinate.asCartesianCoordinate());
@@ -39,6 +53,9 @@ public abstract class AbstractCoordinate implements Coordinate {
 
 	
 	/**
+	 * @param s1
+	 * @param s2
+	 * @methodtype helper
 	 * computes the central angle
 	 * https://en.wikipedia.org/wiki/Great-circle_distance
 	 */
@@ -58,6 +75,10 @@ public abstract class AbstractCoordinate implements Coordinate {
 				);
 	}
 	
+	/**
+	 * @param coordinate
+	 * @methodtype query
+	 */
 	@Override
 	public double getCentralAngle(Coordinate coordinate) {
 		return getCentralAngle(this.asSphericCoordinate(), coordinate.asSphericCoordinate());
@@ -65,6 +86,9 @@ public abstract class AbstractCoordinate implements Coordinate {
 	
 	
 	/**
+	 * @param c1
+	 * @param c2
+	 * @methodtype helper
 	 * checks if two coordinates are equal
 	 */
 	private boolean isEqual(CartesianCoordinate c1, CartesianCoordinate c2) {
@@ -80,12 +104,18 @@ public abstract class AbstractCoordinate implements Coordinate {
 		return false;
 	}
 
+	/**
+	 * @param coordinate
+	 * @methodtype query
+	 */
 	@Override
 	public boolean isEqual(Coordinate coordinate) {
 		return isEqual(this.asCartesianCoordinate(), coordinate.asCartesianCoordinate());
 	}
 	
-	
+	/**
+	 * @methodtype helper
+	 */
 	protected abstract void assertClassInvariants();
 	
 }

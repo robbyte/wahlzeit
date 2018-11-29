@@ -26,14 +26,14 @@ public class MountainPhotoManager extends PhotoManager {
 
 	
 	/**
-	 * @methodtype constructor
+	 * constructor
 	 */
 	public MountainPhotoManager() {
 		photoTagCollector = MountainPhotoFactory.getInstance().createPhotoTagCollector();
 	}
 	
 	/**
-	 *
+	 * @methodtype query
 	 */
 	public static final MountainPhotoManager getInstance() {
 		return instance;

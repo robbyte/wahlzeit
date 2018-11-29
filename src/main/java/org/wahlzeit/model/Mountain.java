@@ -10,28 +10,21 @@
 
 package org.wahlzeit.model;
 
-/**
- * 
- */
+
 public class Mountain {
 	/**
-	 * name of the mountain
+	 * 
 	 */
 	private String name;
-	
-	/**
-	 * elevation height of the mountain in meters
-	 */
 	private int elevation;
-	
-	/**
-	 * prominence in meters
-	 */
 	private int prominence;
 	
 	
 	/**
-	 * @methodtype constructor
+	 * @param name Name of the mountain
+	 * @param elevation Elevation height of the mountain in meters
+	 * @param prominence Prominence in meters
+	 * constructor
 	 */
 	public Mountain(String name, int elevation, int prominence) {
 		this.name = name;
@@ -41,47 +34,42 @@ public class Mountain {
 
 
 	/**
-	 * @methodtype get
+	 * @methodtype query
 	 */
 	public String getName() {
 		return name;
 	}
 
-
 	/**
-	 * @methodtype set
+	 * @methodtype mutation
 	 */
 	public void setName(String name) {
 		this.name = name;
 	}
 
-
 	/**
-	 * @methodtype get
+	 * @methodtype query
 	 */
 	public int getElevation() {
 		return elevation;
 	}
 
-
 	/**
-	 * @methodtype set
+	 * @methodtype mutation
 	 */
 	public void setElevation(int elevation) {
 		this.elevation = elevation;
 	}
 
-
 	/**
-	 * @methodtype get
+	 * @methodtype query
 	 */
 	public int getProminence() {
 		return prominence;
 	}
 
-
 	/**
-	 * @methodtype set
+	 * @methodtype mutation
 	 */
 	public void setProminence(int prominence) {
 		this.prominence = prominence;

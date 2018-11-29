@@ -18,7 +18,10 @@ public class SphericCoordinate extends AbstractCoordinate {
 	
 	
 	/**
-	 * 
+	 * @param phi Angle in degrees [-90, 90]
+	 * @param theta Angle in degrees [-180, 180]
+	 * @param radius The Radius as a positive number.
+	 * constructor
 	 */
 	public SphericCoordinate(double phi, double theta, double radius) {
 		setPhi(phi);
@@ -30,6 +33,7 @@ public class SphericCoordinate extends AbstractCoordinate {
 
 	
 	/**
+	 * @methodtype query
 	 * forward equals() to isEqual()
 	 */
 	@Override
@@ -46,35 +50,50 @@ public class SphericCoordinate extends AbstractCoordinate {
 
 	
 	/**
-	 * getter and setter methods
+	 * @methodtype query
 	 */
 	public double getPhi() {
 		return phi;
 	}
 
+	/**
+	 * @methodtype mutation
+	 */
 	public void setPhi(double phi) {
 		this.phi = phi;
 	}
 
+	/**
+	 * @methodtype query
+	 */
 	public double getTheta() {
 		return theta;
 	}
 
+	/**
+	 * @methodtype mutation
+	 */
 	public void setTheta(double theta) {
 		this.theta = theta;
 	}
 
+	/**
+	 * @methodtype query
+	 */
 	public double getRadius() {
 		return radius;
 	}
 
+	/**
+	 * @methodtype mutation
+	 */
 	public void setRadius(double radius) {
 		this.radius = radius;
 	}
 	
 
 	/**
-	 * override abstract methods
+	 * @methodtype query
 	 */
 	@Override
 	public CartesianCoordinate asCartesianCoordinate() {
@@ -90,6 +109,9 @@ public class SphericCoordinate extends AbstractCoordinate {
 		return new CartesianCoordinate(x, y, z);
 	}
 
+	/**
+	 * @methodtype query
+	 */
 	@Override
 	public SphericCoordinate asSphericCoordinate() {
 		assertClassInvariants();
@@ -98,8 +120,9 @@ public class SphericCoordinate extends AbstractCoordinate {
 	}
 
 	
+
 	/**
-	 * assertion methods
+	 * @methodtype helper
 	 */
 	@Override
 	protected void assertClassInvariants() {
@@ -108,14 +131,26 @@ public class SphericCoordinate extends AbstractCoordinate {
 		assertValidRadius(radius);
 	}
 	
+	/**
+	 * @param phi
+	 * @methodtype helper
+	 */
 	protected void assertValidPhi(double phi) {
 		assert (Math.abs(phi) <= 90.0);
 	}
-	
+
+	/**
+	 * @param theta
+	 * @methodtype helper
+	 */
 	protected void assertValidTheta(double theta) {
 		assert (Math.abs(theta) <= 180.0);
 	}
-	
+
+	/**
+	 * @param radius
+	 * @methodtype helper
+	 */
 	protected void assertValidRadius(double radius) {
 		assert (Math.abs(radius) >= 0);
 	}

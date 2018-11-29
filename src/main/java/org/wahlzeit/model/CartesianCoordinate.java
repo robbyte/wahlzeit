@@ -1,9 +1,9 @@
 /*
 * Class: CartesianCoordinate
 *
-* Version: 2.0
+* Version: 2.1
 *
-* Date: 24.11.2018
+* Date: 29.11.2018
 *
 * Copyright notice: AGPLv3
 */
@@ -18,7 +18,10 @@ public class CartesianCoordinate extends AbstractCoordinate {
 	
 	
 	/**
-	 * 
+	 * @param x Coordinate in x direction
+	 * @param y Coordinate in y direction
+	 * @param z Coordinate in z direction
+	 * constructor
 	 */
 	public CartesianCoordinate(double x, double y, double z) {
 		setX(x);
@@ -30,6 +33,7 @@ public class CartesianCoordinate extends AbstractCoordinate {
 	
 
 	/**
+	 * @methodtype query
 	 * forward equals() to isEqual()
 	 */
 	@Override
@@ -46,34 +50,49 @@ public class CartesianCoordinate extends AbstractCoordinate {
 
 
 	/**
-	 * getter and setter methods
+	 * @methodtype query
 	 */
 	public double getX() {
 		return x;
 	}
 
+	/**
+	 * @methodtype mutation
+	 */
 	public void setX(double x) {
 		this.x = x;
 	}
 
+	/**
+	 * @methodtype query
+	 */
 	public double getY() {
 		return y;
 	}
 
+	/**
+	 * @methodtype mutation
+	 */
 	public void setY(double y) {
 		this.y = y;
 	}
 
+	/**
+	 * @methodtype query
+	 */
 	public double getZ() {
 		return z;
 	}
 
+	/**
+	 * @methodtype mutation
+	 */
 	public void setZ(double z) {
 		this.z = z;
 	}
 
 	/**
-	 * override abstract methods
+	 * @methodtype query
 	 */
 	@Override
 	public CartesianCoordinate asCartesianCoordinate() {
@@ -81,7 +100,10 @@ public class CartesianCoordinate extends AbstractCoordinate {
 		
 		return this;
 	}
-
+	
+	/**
+	 * @methodtype query
+	 */
 	@Override
 	public SphericCoordinate asSphericCoordinate() {
 		assertClassInvariants();
@@ -97,7 +119,7 @@ public class CartesianCoordinate extends AbstractCoordinate {
 	}
 	
 	/**
-	 * assertion methods
+	 * @methodtype helper
 	 */
 	@Override
 	protected void assertClassInvariants() {
@@ -107,6 +129,10 @@ public class CartesianCoordinate extends AbstractCoordinate {
 		
 	}
 	
+	/**
+	 * @param number
+	 * @methodtype helper
+	 */
 	protected void assertValidDouble(double number) {
 		assert(number != Double.NaN);
 	}

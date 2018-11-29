@@ -31,13 +31,14 @@ public class MountainPhotoFactory extends PhotoFactory {
 
 	
 	/**
-	 *
+	 * constructor
 	 */
 	protected MountainPhotoFactory() {
 		super();
 	}
 
 	/**
+	 * @methodtype mutation
 	 * Hidden singleton instance; needs to be initialized from the outside.
 	 */
 	public static void initialize() {
@@ -45,6 +46,7 @@ public class MountainPhotoFactory extends PhotoFactory {
 	}
 
 	/**
+	 * @methodtype query
 	 * Public singleton access method.
 	 */
 	public static synchronized MountainPhotoFactory getInstance() {
@@ -57,6 +59,8 @@ public class MountainPhotoFactory extends PhotoFactory {
 	}
 
 	/**
+	 * @param mountainPhotoFactory
+	 * @methodtype mutation
 	 * Method to set the singleton instance of MountainPhotoFactory.
 	 */
 	protected static synchronized void setInstance(MountainPhotoFactory mountainPhotoFactory) {
@@ -69,13 +73,15 @@ public class MountainPhotoFactory extends PhotoFactory {
 	
 	
 	/**
-	 * @methodtype factory
+	 * @methodtype mutation
 	 */
 	public MountainPhoto createPhoto() {
 		return new MountainPhoto();
 	}
 
 	/**
+	 * @param id
+	 * @methodtype mutation
 	 * Creates a new MountainPhoto with the specified id
 	 */
 	public MountainPhoto createPhoto(PhotoId id) {
