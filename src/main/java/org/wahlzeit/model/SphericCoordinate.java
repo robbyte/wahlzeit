@@ -1,9 +1,9 @@
 /*
 * Class: SphericCoordinate
 *
-* Version: 2.0
+* Version: 2.1
 *
-* Date: 24.11.2018
+* Date: 29.11.2018
 *
 * Copyright notice: AGPLv3
 */
@@ -24,6 +24,8 @@ public class SphericCoordinate extends AbstractCoordinate {
 		setPhi(phi);
 		setTheta(theta);
 		setRadius(radius);
+
+		assertClassInvariants();
 	}
 
 	
@@ -51,9 +53,6 @@ public class SphericCoordinate extends AbstractCoordinate {
 	}
 
 	public void setPhi(double phi) {
-		if (Math.abs(phi) > 90.0) {
-			throw new IllegalArgumentException("Latitude has to be in range of [-90,90]");
-		}
 		this.phi = phi;
 	}
 
@@ -62,9 +61,6 @@ public class SphericCoordinate extends AbstractCoordinate {
 	}
 
 	public void setTheta(double theta) {
-		if (Math.abs(theta) > 180.0) {
-			throw new IllegalArgumentException("Longtitude has to be in range of [-180,180]");
-		}
 		this.theta = theta;
 	}
 
@@ -73,9 +69,6 @@ public class SphericCoordinate extends AbstractCoordinate {
 	}
 
 	public void setRadius(double radius) {
-		if (radius < 0.0) {
-			throw new IllegalArgumentException("Radius has to be a positive number.");
-		}
 		this.radius = radius;
 	}
 	
@@ -85,6 +78,8 @@ public class SphericCoordinate extends AbstractCoordinate {
 	 */
 	@Override
 	public CartesianCoordinate asCartesianCoordinate() {
+		assertClassInvariants();
+		
 		double p = Math.toRadians(phi);
 		double t = Math.toRadians(theta);
 		
@@ -92,13 +87,38 @@ public class SphericCoordinate extends AbstractCoordinate {
 		double y = radius * Math.sin(t) * Math.sin(p);
 		double z = radius * Math.cos(t);
 		
-		return new CartesianCoordinate(x,y,z);
+		return new CartesianCoordinate(x, y, z);
 	}
 
 	@Override
 	public SphericCoordinate asSphericCoordinate() {
+		assertClassInvariants();
+		
 		return this;
 	}
 
+	
+	/**
+	 * assertion methods
+	 */
+	@Override
+	protected void assertClassInvariants() {
+		assertValidPhi(phi);
+		assertValidTheta(theta);
+		assertValidRadius(radius);
+	}
+	
+	protected void assertValidPhi(double phi) {
+		assert (Math.abs(phi) <= 90.0);
+	}
+	
+	protected void assertValidTheta(double theta) {
+		assert (Math.abs(theta) <= 180.0);
+	}
+	
+	protected void assertValidRadius(double radius) {
+		assert (Math.abs(radius) >= 0);
+	}
+	
 
 }

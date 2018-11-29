@@ -23,6 +23,8 @@ public abstract class AbstractCoordinate implements Coordinate {
 	 * computes the direct Cartesian distance
 	 */
 	private double getDistance(CartesianCoordinate c1, CartesianCoordinate c2) {
+		assertClassInvariants();
+		
 		return Math.sqrt(
 				Math.pow(c1.getX() - c2.getX(), 2) + 
 				Math.pow(c1.getY() - c2.getY(), 2) + 
@@ -41,6 +43,8 @@ public abstract class AbstractCoordinate implements Coordinate {
 	 * https://en.wikipedia.org/wiki/Great-circle_distance
 	 */
 	private double getCentralAngle(SphericCoordinate s1, SphericCoordinate s2) {
+		assertClassInvariants();
+		
 		double p1 = Math.toRadians(s1.getPhi());
 		double t1 = Math.toRadians(s1.getTheta());
 		double p2 = Math.toRadians(s2.getPhi());
@@ -64,6 +68,8 @@ public abstract class AbstractCoordinate implements Coordinate {
 	 * checks if two coordinates are equal
 	 */
 	private boolean isEqual(CartesianCoordinate c1, CartesianCoordinate c2) {
+		assertClassInvariants();
+		
 		final double THRESHOLD = 0.00001;
 
 		if (Math.abs(c1.getX() - c2.getX()) < THRESHOLD &&
@@ -78,5 +84,8 @@ public abstract class AbstractCoordinate implements Coordinate {
 	public boolean isEqual(Coordinate coordinate) {
 		return isEqual(this.asCartesianCoordinate(), coordinate.asCartesianCoordinate());
 	}
+	
+	
+	protected abstract void assertClassInvariants();
 	
 }

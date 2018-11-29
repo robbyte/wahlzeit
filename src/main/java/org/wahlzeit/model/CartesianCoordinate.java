@@ -21,9 +21,11 @@ public class CartesianCoordinate extends AbstractCoordinate {
 	 * 
 	 */
 	public CartesianCoordinate(double x, double y, double z) {
-		this.x = x;
-		this.y = y;
-		this.z = z;
+		setX(x);
+		setY(y);
+		setZ(z);
+		
+		assertClassInvariants();
 	}
 	
 
@@ -75,11 +77,15 @@ public class CartesianCoordinate extends AbstractCoordinate {
 	 */
 	@Override
 	public CartesianCoordinate asCartesianCoordinate() {
+		assertClassInvariants();
+		
 		return this;
 	}
 
 	@Override
 	public SphericCoordinate asSphericCoordinate() {
+		assertClassInvariants();
+		
 		double radius = Math.sqrt(x * x + y * y + z * z);
 		double p = Math.atan(y / x);
 		double t = Math.acos(z / radius);
@@ -90,4 +96,18 @@ public class CartesianCoordinate extends AbstractCoordinate {
 		return new SphericCoordinate(phi, theta, radius);
 	}
 	
+	/**
+	 * assertion methods
+	 */
+	@Override
+	protected void assertClassInvariants() {
+		assertValidDouble(x);
+		assertValidDouble(y);
+		assertValidDouble(z);
+		
+	}
+	
+	protected void assertValidDouble(double number) {
+		assert(number != Double.NaN);
+	}
 }
