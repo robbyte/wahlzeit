@@ -33,13 +33,11 @@ public abstract class AbstractCoordinate implements Coordinate {
 	 * computes the direct Cartesian distance
 	 */
 	private double getDistance(CartesianCoordinate c1, CartesianCoordinate c2) {
-		assertClassInvariants();
-		
 		return Math.sqrt(
 				Math.pow(c1.getX() - c2.getX(), 2) + 
 				Math.pow(c1.getY() - c2.getY(), 2) + 
 				Math.pow(c1.getZ() - c2.getZ(), 2)
-				);		
+				);
 	}
 	
 	/**
@@ -48,7 +46,10 @@ public abstract class AbstractCoordinate implements Coordinate {
 	 */
 	@Override
 	public double getCartesianDistance(Coordinate coordinate) {
-		return getDistance(this.asCartesianCoordinate(), coordinate.asCartesianCoordinate());
+		assertClassInvariants();
+		double result = getDistance(this.asCartesianCoordinate(), coordinate.asCartesianCoordinate());
+		assertValidDouble(result);
+		return result;
 	}
 
 	
@@ -60,8 +61,6 @@ public abstract class AbstractCoordinate implements Coordinate {
 	 * https://en.wikipedia.org/wiki/Great-circle_distance
 	 */
 	private double getCentralAngle(SphericCoordinate s1, SphericCoordinate s2) {
-		assertClassInvariants();
-		
 		double p1 = Math.toRadians(s1.getPhi());
 		double t1 = Math.toRadians(s1.getTheta());
 		double p2 = Math.toRadians(s2.getPhi());
@@ -81,7 +80,10 @@ public abstract class AbstractCoordinate implements Coordinate {
 	 */
 	@Override
 	public double getCentralAngle(Coordinate coordinate) {
-		return getCentralAngle(this.asSphericCoordinate(), coordinate.asSphericCoordinate());
+		assertClassInvariants();
+		double result = getCentralAngle(this.asSphericCoordinate(), coordinate.asSphericCoordinate());
+		assertValidDouble(result);
+		return result;
 	}
 	
 	
@@ -92,8 +94,6 @@ public abstract class AbstractCoordinate implements Coordinate {
 	 * checks if two coordinates are equal
 	 */
 	private boolean isEqual(CartesianCoordinate c1, CartesianCoordinate c2) {
-		assertClassInvariants();
-		
 		final double THRESHOLD = 0.00001;
 
 		if (Math.abs(c1.getX() - c2.getX()) < THRESHOLD &&
@@ -110,6 +110,7 @@ public abstract class AbstractCoordinate implements Coordinate {
 	 */
 	@Override
 	public boolean isEqual(Coordinate coordinate) {
+		assertClassInvariants();
 		return isEqual(this.asCartesianCoordinate(), coordinate.asCartesianCoordinate());
 	}
 	
@@ -117,5 +118,38 @@ public abstract class AbstractCoordinate implements Coordinate {
 	 * @methodtype helper
 	 */
 	protected abstract void assertClassInvariants();
+	
+	
+	/**
+	 * @param phi
+	 * @methodtype helper
+	 */
+	protected void assertValidPhi(double phi) {
+		assert (Math.abs(phi) <= 90.0);
+	}
+
+	/**
+	 * @param theta
+	 * @methodtype helper
+	 */
+	protected void assertValidTheta(double theta) {
+		assert (Math.abs(theta) <= 180.0);
+	}
+
+	/**
+	 * @param radius
+	 * @methodtype helper
+	 */
+	protected void assertValidRadius(double radius) {
+		assert (Math.abs(radius) >= 0);
+	}
+	
+	/**
+	 * @param number
+	 * @methodtype helper
+	 */
+	protected void assertValidDouble(double number) {
+		assert(number != Double.NaN);
+	}
 	
 }

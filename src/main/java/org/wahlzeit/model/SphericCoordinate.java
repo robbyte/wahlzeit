@@ -60,6 +60,7 @@ public class SphericCoordinate extends AbstractCoordinate {
 	 * @methodtype mutation
 	 */
 	public void setPhi(double phi) {
+		assertValidPhi(phi);
 		this.phi = phi;
 	}
 
@@ -74,6 +75,7 @@ public class SphericCoordinate extends AbstractCoordinate {
 	 * @methodtype mutation
 	 */
 	public void setTheta(double theta) {
+		assertValidTheta(theta);
 		this.theta = theta;
 	}
 
@@ -88,6 +90,7 @@ public class SphericCoordinate extends AbstractCoordinate {
 	 * @methodtype mutation
 	 */
 	public void setRadius(double radius) {
+		assertValidRadius(radius);
 		this.radius = radius;
 	}
 	
@@ -105,6 +108,10 @@ public class SphericCoordinate extends AbstractCoordinate {
 		double x = radius * Math.sin(t) * Math.cos(p);
 		double y = radius * Math.sin(t) * Math.sin(p);
 		double z = radius * Math.cos(t);
+
+		assertValidDouble(x);
+		assertValidDouble(y);
+		assertValidDouble(z);
 		
 		return new CartesianCoordinate(x, y, z);
 	}
@@ -115,7 +122,6 @@ public class SphericCoordinate extends AbstractCoordinate {
 	@Override
 	public SphericCoordinate asSphericCoordinate() {
 		assertClassInvariants();
-		
 		return this;
 	}
 
@@ -130,30 +136,7 @@ public class SphericCoordinate extends AbstractCoordinate {
 		assertValidTheta(theta);
 		assertValidRadius(radius);
 	}
-	
-	/**
-	 * @param phi
-	 * @methodtype helper
-	 */
-	protected void assertValidPhi(double phi) {
-		assert (Math.abs(phi) <= 90.0);
-	}
 
-	/**
-	 * @param theta
-	 * @methodtype helper
-	 */
-	protected void assertValidTheta(double theta) {
-		assert (Math.abs(theta) <= 180.0);
-	}
-
-	/**
-	 * @param radius
-	 * @methodtype helper
-	 */
-	protected void assertValidRadius(double radius) {
-		assert (Math.abs(radius) >= 0);
-	}
 	
 
 }

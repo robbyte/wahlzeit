@@ -60,6 +60,7 @@ public class CartesianCoordinate extends AbstractCoordinate {
 	 * @methodtype mutation
 	 */
 	public void setX(double x) {
+		assertValidDouble(x);
 		this.x = x;
 	}
 
@@ -74,6 +75,7 @@ public class CartesianCoordinate extends AbstractCoordinate {
 	 * @methodtype mutation
 	 */
 	public void setY(double y) {
+		assertValidDouble(y);
 		this.y = y;
 	}
 
@@ -88,6 +90,7 @@ public class CartesianCoordinate extends AbstractCoordinate {
 	 * @methodtype mutation
 	 */
 	public void setZ(double z) {
+		assertValidDouble(z);
 		this.z = z;
 	}
 
@@ -97,7 +100,6 @@ public class CartesianCoordinate extends AbstractCoordinate {
 	@Override
 	public CartesianCoordinate asCartesianCoordinate() {
 		assertClassInvariants();
-		
 		return this;
 	}
 	
@@ -115,6 +117,10 @@ public class CartesianCoordinate extends AbstractCoordinate {
 		double phi = Math.toDegrees(p);
 		double theta = Math.toDegrees(t);
 		
+		assertValidPhi(phi);
+		assertValidTheta(theta);
+		assertValidRadius(radius);
+		
 		return new SphericCoordinate(phi, theta, radius);
 	}
 	
@@ -128,12 +134,5 @@ public class CartesianCoordinate extends AbstractCoordinate {
 		assertValidDouble(z);
 		
 	}
-	
-	/**
-	 * @param number
-	 * @methodtype helper
-	 */
-	protected void assertValidDouble(double number) {
-		assert(number != Double.NaN);
-	}
+
 }
