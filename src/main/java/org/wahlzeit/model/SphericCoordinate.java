@@ -10,7 +10,14 @@
 
 package org.wahlzeit.model;
 
+import java.util.logging.Logger;
+
+import org.wahlzeit.services.LogBuilder;
+
 public class SphericCoordinate extends AbstractCoordinate {
+	
+	private static final Logger log = Logger.getLogger(SphericCoordinate.class.getName());
+	
 	/**
 	 *
 	 */
@@ -23,7 +30,7 @@ public class SphericCoordinate extends AbstractCoordinate {
 	 * @param radius The Radius as a positive number.
 	 * constructor
 	 */
-	public SphericCoordinate(double phi, double theta, double radius) {
+	public SphericCoordinate(double phi, double theta, double radius) throws IllegalArgumentException {
 		setPhi(phi);
 		setTheta(theta);
 		setRadius(radius);
@@ -59,7 +66,7 @@ public class SphericCoordinate extends AbstractCoordinate {
 	/**
 	 * @methodtype mutation
 	 */
-	public void setPhi(double phi) {
+	public void setPhi(double phi) throws IllegalArgumentException {
 		assertValidPhi(phi);
 		this.phi = phi;
 	}
@@ -74,7 +81,7 @@ public class SphericCoordinate extends AbstractCoordinate {
 	/**
 	 * @methodtype mutation
 	 */
-	public void setTheta(double theta) {
+	public void setTheta(double theta) throws IllegalArgumentException {
 		assertValidTheta(theta);
 		this.theta = theta;
 	}
@@ -89,7 +96,7 @@ public class SphericCoordinate extends AbstractCoordinate {
 	/**
 	 * @methodtype mutation
 	 */
-	public void setRadius(double radius) {
+	public void setRadius(double radius) throws IllegalArgumentException {
 		assertValidRadius(radius);
 		this.radius = radius;
 	}
@@ -99,7 +106,7 @@ public class SphericCoordinate extends AbstractCoordinate {
 	 * @methodtype query
 	 */
 	@Override
-	public CartesianCoordinate asCartesianCoordinate() {
+	public CartesianCoordinate asCartesianCoordinate() throws IllegalArgumentException {
 		assertClassInvariants();
 		
 		double p = Math.toRadians(phi);
@@ -120,7 +127,7 @@ public class SphericCoordinate extends AbstractCoordinate {
 	 * @methodtype query
 	 */
 	@Override
-	public SphericCoordinate asSphericCoordinate() {
+	public SphericCoordinate asSphericCoordinate() throws IllegalArgumentException {
 		assertClassInvariants();
 		return this;
 	}
@@ -131,10 +138,15 @@ public class SphericCoordinate extends AbstractCoordinate {
 	 * @methodtype helper
 	 */
 	@Override
-	protected void assertClassInvariants() {
-		assertValidPhi(phi);
-		assertValidTheta(theta);
-		assertValidRadius(radius);
+	protected void assertClassInvariants() throws IllegalArgumentException {
+		try {
+			assertValidPhi(phi);
+			assertValidTheta(theta);
+			assertValidRadius(radius);
+		} catch (IllegalArgumentException e) {
+			log.config(LogBuilder.createSystemMessage().addException(e.getMessage(), e).toString());
+			throw e;
+		}
 	}
 
 	

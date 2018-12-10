@@ -27,9 +27,9 @@ public class Mountain {
 	 * constructor
 	 */
 	public Mountain(String name, int elevation, int prominence) {
-		this.name = name;
-		this.elevation = elevation;
-		this.prominence = prominence;
+		setName(name);
+		setElevation(elevation);
+		setProminence(prominence);
 	}
 
 
@@ -44,6 +44,7 @@ public class Mountain {
 	 * @methodtype mutation
 	 */
 	public void setName(String name) {
+		assertValidName(name);
 		this.name = name;
 	}
 
@@ -58,6 +59,7 @@ public class Mountain {
 	 * @methodtype mutation
 	 */
 	public void setElevation(int elevation) {
+		assertValidElevation(elevation);
 		this.elevation = elevation;
 	}
 
@@ -72,8 +74,48 @@ public class Mountain {
 	 * @methodtype mutation
 	 */
 	public void setProminence(int prominence) {
+		assertValidProminence(prominence);
 		this.prominence = prominence;
 	}
+	
+	
+	/**
+	 * @param name
+	 * @methodtype helper
+	 */
+	protected void assertValidName(String name) {
+		if (name.length() == 0) {
+			throw new IllegalArgumentException("The name must to be empty.");
+		}
+		if (name.length() > 100) {
+			throw new IllegalArgumentException("The name can have at least 100 characters.");
+		}
+	}
+	
+	/**
+	 * @param elevation
+	 * @methodtype helper
+	 */
+	protected void assertValidElevation(int elevation) {
+		if (elevation < 0) {
+			throw new IllegalArgumentException("Elevation must be a positive number.");
+		}
+		if (elevation > 10000) {
+			throw new IllegalArgumentException("There is no mountain higher than 10 km.");
+		}
+	}
+	
+	/**
+	 * @param prominence
+	 * @methodtype helper
+	 */
+	protected void assertValidProminence(int prominence) {
+		if (prominence < 0) {
+			throw new IllegalArgumentException("Prominence must be a positive number.");
+		}
+	}
+
+
 
 
 }

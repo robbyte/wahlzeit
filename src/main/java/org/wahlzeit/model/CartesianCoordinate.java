@@ -10,7 +10,14 @@
 
 package org.wahlzeit.model;
 
+import java.util.logging.Logger;
+
+import org.wahlzeit.services.LogBuilder;
+
 public class CartesianCoordinate extends AbstractCoordinate {
+
+	private static final Logger log = Logger.getLogger(SphericCoordinate.class.getName());
+	
 	/**
 	 *
 	 */
@@ -23,7 +30,7 @@ public class CartesianCoordinate extends AbstractCoordinate {
 	 * @param z Coordinate in z direction
 	 * constructor
 	 */
-	public CartesianCoordinate(double x, double y, double z) {
+	public CartesianCoordinate(double x, double y, double z) throws IllegalArgumentException {
 		setX(x);
 		setY(y);
 		setZ(z);
@@ -59,7 +66,7 @@ public class CartesianCoordinate extends AbstractCoordinate {
 	/**
 	 * @methodtype mutation
 	 */
-	public void setX(double x) {
+	public void setX(double x) throws IllegalArgumentException {
 		assertValidDouble(x);
 		this.x = x;
 	}
@@ -74,7 +81,7 @@ public class CartesianCoordinate extends AbstractCoordinate {
 	/**
 	 * @methodtype mutation
 	 */
-	public void setY(double y) {
+	public void setY(double y) throws IllegalArgumentException {
 		assertValidDouble(y);
 		this.y = y;
 	}
@@ -89,7 +96,7 @@ public class CartesianCoordinate extends AbstractCoordinate {
 	/**
 	 * @methodtype mutation
 	 */
-	public void setZ(double z) {
+	public void setZ(double z) throws IllegalArgumentException {
 		assertValidDouble(z);
 		this.z = z;
 	}
@@ -98,7 +105,7 @@ public class CartesianCoordinate extends AbstractCoordinate {
 	 * @methodtype query
 	 */
 	@Override
-	public CartesianCoordinate asCartesianCoordinate() {
+	public CartesianCoordinate asCartesianCoordinate() throws IllegalArgumentException {
 		assertClassInvariants();
 		return this;
 	}
@@ -107,7 +114,7 @@ public class CartesianCoordinate extends AbstractCoordinate {
 	 * @methodtype query
 	 */
 	@Override
-	public SphericCoordinate asSphericCoordinate() {
+	public SphericCoordinate asSphericCoordinate() throws IllegalArgumentException {
 		assertClassInvariants();
 		
 		double radius = Math.sqrt(x * x + y * y + z * z);
@@ -128,11 +135,15 @@ public class CartesianCoordinate extends AbstractCoordinate {
 	 * @methodtype helper
 	 */
 	@Override
-	protected void assertClassInvariants() {
-		assertValidDouble(x);
-		assertValidDouble(y);
-		assertValidDouble(z);
-		
+	protected void assertClassInvariants() throws IllegalArgumentException {
+		try {
+			assertValidDouble(x);
+			assertValidDouble(y);
+			assertValidDouble(z);
+		} catch (IllegalArgumentException e) {
+			log.config(LogBuilder.createSystemMessage().addException(e.getMessage(), e).toString());
+			throw e;
+		}
 	}
 
 }

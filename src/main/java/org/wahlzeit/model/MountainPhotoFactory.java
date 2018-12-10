@@ -85,6 +85,9 @@ public class MountainPhotoFactory extends PhotoFactory {
 	 * Creates a new MountainPhoto with the specified id
 	 */
 	public MountainPhoto createPhoto(PhotoId id) {
+		if (id.value < 0) {
+			throw new IllegalArgumentException("PhotoId must be a positive number.");
+		}
 		return new MountainPhoto(id);
 	}
 	

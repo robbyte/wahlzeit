@@ -16,14 +16,14 @@ public abstract class AbstractCoordinate implements Coordinate {
 	 * @methodtype query
 	 */
 	@Override
-	public abstract CartesianCoordinate asCartesianCoordinate();
+	public abstract CartesianCoordinate asCartesianCoordinate() throws IllegalArgumentException;
 	
 	
 	/**
 	 * @methodtype query
 	 */
 	@Override
-	public abstract SphericCoordinate asSphericCoordinate();
+	public abstract SphericCoordinate asSphericCoordinate() throws IllegalArgumentException;
 	
 	
 	/**
@@ -45,7 +45,7 @@ public abstract class AbstractCoordinate implements Coordinate {
 	 * @methodtype query
 	 */
 	@Override
-	public double getCartesianDistance(Coordinate coordinate) {
+	public double getCartesianDistance(Coordinate coordinate) throws IllegalArgumentException {
 		assertClassInvariants();
 		double result = getDistance(this.asCartesianCoordinate(), coordinate.asCartesianCoordinate());
 		assertValidDouble(result);
@@ -79,7 +79,7 @@ public abstract class AbstractCoordinate implements Coordinate {
 	 * @methodtype query
 	 */
 	@Override
-	public double getCentralAngle(Coordinate coordinate) {
+	public double getCentralAngle(Coordinate coordinate) throws IllegalArgumentException {
 		assertClassInvariants();
 		double result = getCentralAngle(this.asSphericCoordinate(), coordinate.asSphericCoordinate());
 		assertValidDouble(result);
@@ -109,7 +109,7 @@ public abstract class AbstractCoordinate implements Coordinate {
 	 * @methodtype query
 	 */
 	@Override
-	public boolean isEqual(Coordinate coordinate) {
+	public boolean isEqual(Coordinate coordinate) throws IllegalArgumentException {
 		assertClassInvariants();
 		return isEqual(this.asCartesianCoordinate(), coordinate.asCartesianCoordinate());
 	}
@@ -124,32 +124,43 @@ public abstract class AbstractCoordinate implements Coordinate {
 	 * @param phi
 	 * @methodtype helper
 	 */
-	protected void assertValidPhi(double phi) {
-		assert (Math.abs(phi) <= 90.0);
+	protected void assertValidPhi(double phi) throws IllegalArgumentException {
+		if (Math.abs(phi) > 90.0) {
+			throw new IllegalArgumentException("The angle phi has to be in range of [-90,90].");
+		}
 	}
 
 	/**
 	 * @param theta
 	 * @methodtype helper
 	 */
-	protected void assertValidTheta(double theta) {
-		assert (Math.abs(theta) <= 180.0);
+	protected void assertValidTheta(double theta) throws IllegalArgumentException {
+		if (Math.abs(theta) > 180.0) {
+			throw new IllegalArgumentException("The angle theta has to be in range of [-180,180].");
+		}
 	}
 
 	/**
 	 * @param radius
 	 * @methodtype helper
 	 */
-	protected void assertValidRadius(double radius) {
-		assert (Math.abs(radius) >= 0);
+	protected void assertValidRadius(double radius) throws IllegalArgumentException {
+		if (Math.abs(radius) < 0) {
+			throw new IllegalArgumentException("The Radius has to be a positive number.");
+		}
 	}
 	
 	/**
 	 * @param number
 	 * @methodtype helper
 	 */
-	protected void assertValidDouble(double number) {
-		assert(number != Double.NaN);
+	protected void assertValidDouble(double number) throws IllegalArgumentException {
+		if (Double.isNaN(number)) {
+			throw new IllegalArgumentException("The number has to be a valid double.");
+		}
+		if(!Double.isFinite(number)) {
+			throw new IllegalArgumentException("The number has to be finite.");
+		}
 	}
 	
 }

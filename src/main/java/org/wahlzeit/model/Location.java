@@ -21,6 +21,9 @@ public class Location {
 	 * constructor
 	 */
 	public Location(Coordinate coordinate) {
+		if (coordinate == null) {
+			throw new IllegalArgumentException("Coordinate must be not null.");
+		}
 		this.coordinate = coordinate;
 	}
 	
@@ -36,6 +39,9 @@ public class Location {
 	 * @methodtype mutation
 	 */
 	public void setCoordinate(Coordinate coordinate) {
+		if (coordinate == null) {
+			throw new IllegalArgumentException("Coordinate must be not null.");
+		}
 		this.coordinate = coordinate;
 	}
 	

@@ -33,6 +33,9 @@ public class MountainPhoto extends Photo {
 	 */
 	public MountainPhoto(PhotoId myId) {
 		super(myId);
+		if (myId.value < 0) {
+			throw new IllegalArgumentException("PhotoId must be a positive number.");
+		}
 	}
 	
 
@@ -47,6 +50,9 @@ public class MountainPhoto extends Photo {
 	 * @methodtype mutation
 	 */
 	public void setMountain(Mountain mountain) {
+		if (mountain == null) {
+			throw new IllegalArgumentException("Mountain must be not null.");
+		}
 		this.mountain = mountain;
 	}
 
