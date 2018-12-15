@@ -21,7 +21,7 @@ public class CartesianCoordinate extends AbstractCoordinate {
 	/**
 	 *
 	 */
-	private double x, y, z;
+	private final double x, y, z;
 	
 	
 	/**
@@ -30,12 +30,30 @@ public class CartesianCoordinate extends AbstractCoordinate {
 	 * @param z Coordinate in z direction
 	 * constructor
 	 */
-	public CartesianCoordinate(double x, double y, double z) throws IllegalArgumentException {
-		setX(x);
-		setY(y);
-		setZ(z);
+	private CartesianCoordinate(double x, double y, double z) throws IllegalArgumentException {
+		assertValidDouble(x);
+		assertValidDouble(y);
+		assertValidDouble(z);
+		
+		this.x = x;
+		this.y = y;
+		this.z = z;
 		
 		assertClassInvariants();
+	}
+	
+	/**
+	 * @methodtype query
+	 */
+	public static CartesianCoordinate createCarthesianCoordinate(double x, double y, double z) {
+		CartesianCoordinate coordinate = new CartesianCoordinate(x, y, z);
+		if (hashMap.containsKey(coordinate.hashCode())) {
+			hashMap.get(coordinate.hashCode());
+		}
+		else {
+			hashMap.put(coordinate.hashCode(), coordinate);
+		}
+		return coordinate;
 	}
 	
 
@@ -54,21 +72,13 @@ public class CartesianCoordinate extends AbstractCoordinate {
 		CartesianCoordinate other = (CartesianCoordinate) obj;
 		return isEqual(other);
 	}
-
-
+	
+	
 	/**
 	 * @methodtype query
 	 */
 	public double getX() {
 		return x;
-	}
-
-	/**
-	 * @methodtype mutation
-	 */
-	public void setX(double x) throws IllegalArgumentException {
-		assertValidDouble(x);
-		this.x = x;
 	}
 
 	/**
@@ -79,27 +89,12 @@ public class CartesianCoordinate extends AbstractCoordinate {
 	}
 
 	/**
-	 * @methodtype mutation
-	 */
-	public void setY(double y) throws IllegalArgumentException {
-		assertValidDouble(y);
-		this.y = y;
-	}
-
-	/**
 	 * @methodtype query
 	 */
 	public double getZ() {
 		return z;
 	}
 
-	/**
-	 * @methodtype mutation
-	 */
-	public void setZ(double z) throws IllegalArgumentException {
-		assertValidDouble(z);
-		this.z = z;
-	}
 
 	/**
 	 * @methodtype query
@@ -128,7 +123,7 @@ public class CartesianCoordinate extends AbstractCoordinate {
 		assertValidTheta(theta);
 		assertValidRadius(radius);
 		
-		return new SphericCoordinate(phi, theta, radius);
+		return SphericCoordinate.createSphericCoordinate(phi, theta, radius);
 	}
 	
 	/**
@@ -145,5 +140,16 @@ public class CartesianCoordinate extends AbstractCoordinate {
 			throw e;
 		}
 	}
+	
+	@Override
+	public int hashCode() {
+		return toString().hashCode();
+	}
+	
+	@Override
+	public String toString() {
+		return "(" + x + ", " + y + ", " + z + ")"; 
+	}
+	
 
 }

@@ -25,7 +25,7 @@ public class SphericCoordinateTest {
 	 */
 	@Test
 	public void testSphericCoordinate() {
-		SphericCoordinate coordinate = new SphericCoordinate(10.0, 20.0, 2.0);
+		SphericCoordinate coordinate = SphericCoordinate.createSphericCoordinate(10.0, 20.0, 2.0);
 
 		assertEquals(10.0, coordinate.getPhi());
 		assertEquals(20.0, coordinate.getTheta());
@@ -37,8 +37,8 @@ public class SphericCoordinateTest {
 	 */
 	@Test
 	public void testSphericCoordinateGetDistance() {		
-		CartesianCoordinate c1 = new CartesianCoordinate(0.0, 2.0, 3.0);
-		CartesianCoordinate c2 = new CartesianCoordinate(1.0, 2.0, 3.0);
+		CartesianCoordinate c1 = CartesianCoordinate.createCarthesianCoordinate(0.0, 2.0, 3.0);
+		CartesianCoordinate c2 = CartesianCoordinate.createCarthesianCoordinate(1.0, 2.0, 3.0);
 
 		SphericCoordinate s1 = c1.asSphericCoordinate();
 		SphericCoordinate s2 = c2.asSphericCoordinate();
@@ -52,9 +52,9 @@ public class SphericCoordinateTest {
 	 */
 	@Test
 	public void testSphericCoordinateEqual() {
-		SphericCoordinate coordinate1 = new SphericCoordinate(10.0, 42.0, 13.37);
-		SphericCoordinate coordinate2 = new SphericCoordinate(10.0, 42.0, 13.37);
-		SphericCoordinate coordinate3 = new SphericCoordinate(20.0, 42.0, 13.37);
+		SphericCoordinate coordinate1 = SphericCoordinate.createSphericCoordinate(10.0, 42.0, 13.37);
+		SphericCoordinate coordinate2 = SphericCoordinate.createSphericCoordinate(10.0, 42.0, 13.37);
+		SphericCoordinate coordinate3 = SphericCoordinate.createSphericCoordinate(20.0, 42.0, 13.37);
 
         assertTrue(coordinate1.equals(coordinate2));
         assertTrue(coordinate2.equals(coordinate1));
@@ -72,7 +72,7 @@ public class SphericCoordinateTest {
 	 */
 	@Test
 	public void testSphericCoordinateConversions() {
-		SphericCoordinate s1 = new SphericCoordinate(42.0, 1.0, 13.37);
+		SphericCoordinate s1 = SphericCoordinate.createSphericCoordinate(42.0, 1.0, 13.37);
 		
 		CartesianCoordinate c1 = s1.asCartesianCoordinate();
 
@@ -86,8 +86,8 @@ public class SphericCoordinateTest {
 	 */
 	@Test
 	public void testSphericCoordinateCentralAngle() {
-		SphericCoordinate s1 = new SphericCoordinate(2.0, -1.0, 1.0);
-		SphericCoordinate s2 = new SphericCoordinate(1.0, 2.0, 3.0);
+		SphericCoordinate s1 = SphericCoordinate.createSphericCoordinate(2.0, -1.0, 1.0);
+		SphericCoordinate s2 = SphericCoordinate.createSphericCoordinate(1.0, 2.0, 3.0);
 
         assertEquals(0.055174, s1.getCentralAngle(s2), THRESHOLD);
         assertEquals(0.055174, s2.getCentralAngle(s1), THRESHOLD);

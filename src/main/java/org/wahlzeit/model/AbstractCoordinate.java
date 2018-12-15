@@ -10,8 +10,12 @@
 
 package org.wahlzeit.model;
 
-public abstract class AbstractCoordinate implements Coordinate {
+import java.util.HashMap;
 
+public abstract class AbstractCoordinate implements Coordinate {
+	
+	protected final static HashMap<Integer,Coordinate> hashMap = new HashMap();
+	
 	/**
 	 * @methodtype query
 	 */

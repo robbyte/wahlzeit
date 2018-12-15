@@ -21,7 +21,7 @@ public class SphericCoordinate extends AbstractCoordinate {
 	/**
 	 *
 	 */
-	private double phi, theta, radius;
+	private final double phi, theta, radius;
 	
 	
 	/**
@@ -30,12 +30,31 @@ public class SphericCoordinate extends AbstractCoordinate {
 	 * @param radius The Radius as a positive number.
 	 * constructor
 	 */
-	public SphericCoordinate(double phi, double theta, double radius) throws IllegalArgumentException {
-		setPhi(phi);
-		setTheta(theta);
-		setRadius(radius);
+	private SphericCoordinate(double phi, double theta, double radius) throws IllegalArgumentException {
+		assertValidPhi(phi);
+		assertValidTheta(theta);
+		assertValidRadius(radius);
+		
+		this.phi = phi;
+		this.theta = theta;
+		this.radius = radius;
 
 		assertClassInvariants();
+	}
+	
+	
+	/**
+	 * @methodtype query
+	 */
+	public static SphericCoordinate createSphericCoordinate(double phi, double theta, double radius) {
+		SphericCoordinate coordinate = new SphericCoordinate(phi, theta, radius);
+		if (hashMap.containsKey(coordinate.hashCode())) {
+			hashMap.get(coordinate.hashCode());
+		}
+		else {
+			hashMap.put(coordinate.hashCode(), coordinate);
+		}
+		return coordinate;
 	}
 
 	
@@ -55,22 +74,14 @@ public class SphericCoordinate extends AbstractCoordinate {
 		return isEqual(other);
 	}
 
-	
+
 	/**
 	 * @methodtype query
 	 */
 	public double getPhi() {
 		return phi;
 	}
-
-	/**
-	 * @methodtype mutation
-	 */
-	public void setPhi(double phi) throws IllegalArgumentException {
-		assertValidPhi(phi);
-		this.phi = phi;
-	}
-
+	
 	/**
 	 * @methodtype query
 	 */
@@ -79,26 +90,10 @@ public class SphericCoordinate extends AbstractCoordinate {
 	}
 
 	/**
-	 * @methodtype mutation
-	 */
-	public void setTheta(double theta) throws IllegalArgumentException {
-		assertValidTheta(theta);
-		this.theta = theta;
-	}
-
-	/**
 	 * @methodtype query
 	 */
 	public double getRadius() {
 		return radius;
-	}
-
-	/**
-	 * @methodtype mutation
-	 */
-	public void setRadius(double radius) throws IllegalArgumentException {
-		assertValidRadius(radius);
-		this.radius = radius;
 	}
 	
 
@@ -120,7 +115,7 @@ public class SphericCoordinate extends AbstractCoordinate {
 		assertValidDouble(y);
 		assertValidDouble(z);
 		
-		return new CartesianCoordinate(x, y, z);
+		return CartesianCoordinate.createCarthesianCoordinate(x,y,z);
 	}
 
 	/**
@@ -149,6 +144,14 @@ public class SphericCoordinate extends AbstractCoordinate {
 		}
 	}
 
+	@Override
+	public int hashCode() {
+		return toString().hashCode();
+	}
 	
+	@Override
+	public String toString() {
+		return "(" + phi + ", " + theta + ", " + radius + ")"; 
+	}
 
 }

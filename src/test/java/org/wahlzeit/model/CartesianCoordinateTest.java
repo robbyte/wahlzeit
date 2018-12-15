@@ -25,7 +25,7 @@ public class CartesianCoordinateTest {
 	 */
 	@Test
 	public void testCartesianCoordinate() {
-		CartesianCoordinate coordinate = new CartesianCoordinate(42.0, -1.0, 13.37);
+		CartesianCoordinate coordinate = CartesianCoordinate.createCarthesianCoordinate(42.0, -1.0, 13.37);
 
 		assertEquals(42.0, coordinate.getX());
 		assertEquals(-1.0, coordinate.getY());
@@ -37,11 +37,11 @@ public class CartesianCoordinateTest {
 	 */
 	@Test
 	public void testCartesianCoordinateGetDistance() {		
-		CartesianCoordinate coordinate1 = new CartesianCoordinate(42.0, -1.0, 13.37);
-		CartesianCoordinate coordinate2 = new CartesianCoordinate(42.0, -1.0, 13.37);
-		CartesianCoordinate coordinate3 = new CartesianCoordinate(0.0, -1.0, 13.37);
-		CartesianCoordinate coordinate4 = new CartesianCoordinate(1.1, 2.2, 3.3);
-		CartesianCoordinate coordinate5 = new CartesianCoordinate(23458234.1123, 212391.2465345235, 32342405.31233);
+		CartesianCoordinate coordinate1 = CartesianCoordinate.createCarthesianCoordinate(42.0, -1.0, 13.37);
+		CartesianCoordinate coordinate2 = CartesianCoordinate.createCarthesianCoordinate(42.0, -1.0, 13.37);
+		CartesianCoordinate coordinate3 = CartesianCoordinate.createCarthesianCoordinate(0.0, -1.0, 13.37);
+		CartesianCoordinate coordinate4 = CartesianCoordinate.createCarthesianCoordinate(1.1, 2.2, 3.3);
+		CartesianCoordinate coordinate5 = CartesianCoordinate.createCarthesianCoordinate(23458234.1123, 212391.2465345235, 32342405.31233);
 
 		assertEquals(coordinate1.getCartesianDistance(coordinate2), 0.0, THRESHOLD);
 		assertEquals(coordinate2.getCartesianDistance(coordinate1), 0.0, THRESHOLD);
@@ -58,9 +58,9 @@ public class CartesianCoordinateTest {
 	 */
 	@Test
 	public void testCartesianCoordinateEqual() {
-		CartesianCoordinate coordinate1 = new CartesianCoordinate(42.0, -1.0, 13.37);
-		CartesianCoordinate coordinate2 = new CartesianCoordinate(42.0, -1.0, 13.37);
-		CartesianCoordinate coordinate3 = new CartesianCoordinate(0.0, -1.0, 13.37);
+		CartesianCoordinate coordinate1 = CartesianCoordinate.createCarthesianCoordinate(42.0, -1.0, 13.37);
+		CartesianCoordinate coordinate2 = CartesianCoordinate.createCarthesianCoordinate(42.0, -1.0, 13.37);
+		CartesianCoordinate coordinate3 = CartesianCoordinate.createCarthesianCoordinate(0.0, -1.0, 13.37);
 
         assertTrue(coordinate1.equals(coordinate2));
         assertTrue(coordinate2.equals(coordinate1));
@@ -78,7 +78,7 @@ public class CartesianCoordinateTest {
 	 */
 	@Test
 	public void testCartesianCoordinateConversions() {
-		CartesianCoordinate c1 = new CartesianCoordinate(42.0, 1.0, 13.37);
+		CartesianCoordinate c1 = CartesianCoordinate.createCarthesianCoordinate(42.0, 1.0, 13.37);
 		
 		SphericCoordinate s1 = c1.asSphericCoordinate();
 
@@ -92,8 +92,8 @@ public class CartesianCoordinateTest {
 	 */
 	@Test
 	public void testSphericCoordinateCentralAngle() {
-		CartesianCoordinate c1 = new CartesianCoordinate(42.0, 1.0, 13.37);
-		CartesianCoordinate c2 = new CartesianCoordinate(1.0, 2.0, 3.0);
+		CartesianCoordinate c1 = CartesianCoordinate.createCarthesianCoordinate(42.0, 1.0, 13.37);
+		CartesianCoordinate c2 = CartesianCoordinate.createCarthesianCoordinate(1.0, 2.0, 3.0);
 
         assertEquals(1.176020, c1.getCentralAngle(c2), THRESHOLD);
         assertEquals(1.176020, c2.getCentralAngle(c1), THRESHOLD);
