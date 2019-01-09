@@ -12,6 +12,17 @@ package org.wahlzeit.model;
 
 import java.util.HashMap;
 
+import org.wahlzeit.utils.PatternInstance;
+
+
+@PatternInstance(
+	patternName = "Template Method", 
+	participants = {
+		"TemplateClass: AbstractCoordinate",
+		"ConcreteClass: SphericCoordinate",
+		"ConcreteClass: CartesianCoordinate"
+	}
+)
 public abstract class AbstractCoordinate implements Coordinate {
 	
 	protected final static HashMap<Integer,Coordinate> hashMap = new HashMap();
