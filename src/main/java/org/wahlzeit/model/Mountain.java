@@ -19,6 +19,22 @@ public class Mountain {
 	private int elevation;
 	private int prominence;
 	
+
+	protected MountainManager manager;
+	protected MountainType mountainType;
+	
+	
+	/**
+	 * @param name Name of the mountain
+	 * @param elevation Elevation height of the mountain in meters
+	 * @param prominence Prominence in meters
+	 * constructor
+	 */
+	public Mountain(MountainType mountainType) {
+		this.mountainType = mountainType;
+		this.manager = mountainType.getMountainManager();
+	}
+	
 	
 	/**
 	 * @param name Name of the mountain
