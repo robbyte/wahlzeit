@@ -10,7 +10,21 @@
 
 package org.wahlzeit.model;
 
-
+/*
+* Method calls for object creation:
+* 	1. MountainManager.getInstance();
+* 	2. MountainManager.createMountain();
+* 	3. MountainType.createInstance();
+* 	4. return new Mountain();
+* 
+* Design Space for object creation:
+* 	1. Delegation: separate-object
+* 	2. Selection: on-the-spot
+* 	3. Configuration: nothing
+* 	4. Instantiation: in-code
+* 	5. Initialization: by-fixed-signature
+* 	6. Building: default
+*/
 public class Mountain {
 	/**
 	 * 

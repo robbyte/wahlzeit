@@ -10,9 +10,21 @@
 
 package org.wahlzeit.model;
 
-/**
- * 
- */
+
+/*
+* Method calls for object creation:
+* 	1. MountainPhotoFactory.getInstance();
+* 	2. MountainPhotoFactory.createPhoto();
+* 	3. return new MountainPhoto;
+* 
+* Design Space for object creation:
+* 	1. Delegation: separate-object
+* 	2. Selection: by-subclassing
+* 	3. Configuration: in-code
+* 	4. Instantiation: in-code
+* 	5. Initialization: default
+* 	6. Building: default
+*/
 public class MountainPhoto extends Photo {
 	
 	/**
